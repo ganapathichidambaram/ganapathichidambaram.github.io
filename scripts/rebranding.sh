@@ -79,6 +79,9 @@ delete_line "src/components/Navigation.jsx" "{ title: 'Webhooks', href: '\/webho
 delete_line "src/components/Navigation.jsx" "{ title: 'Messages', href: '\/messages' },"
 delete_line "src/components/Navigation.jsx" "{ title: 'Groups', href: '\/groups' },"
 delete_line "src/components/Navigation.jsx" "{ title: 'Attachments', href: '\/attachments' },"
+delete_line "src/components/Navigation.jsx" "<TopLevelNavItem href=\"\/\">API<\/TopLevelNavItem>"
+delete_line "src/components/Navigation.jsx" "<TopLevelNavItem href=\"#\">Documentation<\/TopLevelNavItem>"
+delete_line "src/components/Navigation.jsx" "<TopLevelNavItem href=\"#\">Support<\/TopLevelNavItem>"
 
 delete_block() {
     local FILE="$1"
@@ -93,6 +96,7 @@ delete_block() {
 delete_block "src/components/Footer.jsx" "<SocialLink href=\"#\" icon={XIcon}>" "<\/SocialLink>"
 delete_block "src/components/Footer.jsx" "<SocialLink href=\"#\" icon={DiscordIcon}>" "<\/SocialLink>"
 delete_block "src/components/Header.jsx" "<div className=\"hidden min-\[416px]:contents\">" "<\/div>"
+delete_block "src/components/Navigation.jsx" "<li className=\"sticky bottom-0 z-10" "<\/li>"
 
 # Use sed with an alternate delimiter
 
