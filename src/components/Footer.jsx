@@ -103,7 +103,7 @@ function SocialLink({ href, icon: Icon, children }) {
 
 function SmallPrint() {
   return (
-    <div className="flex flex-col items-center justify-between gap-5 border-t border-zinc-900/5 pt-8 sm:flex-row dark:border-white/5">
+    <div className="flex flex-col items-center justify-between gap-5 border-t border-zinc-900/5 pt-2 sm:flex-row dark:border-white/5">
       <p className="text-xs text-zinc-600 dark:text-zinc-400">
         &copy; Copyright 2016 - {new Date().getFullYear()} TechnoBureau. All rights reserved.
       </p>
@@ -118,7 +118,7 @@ function SmallPrint() {
 
 export function Footer() {
   return (
-    <footer className="mx-auto w-full max-w-2xl space-y-10 pb-16 lg:max-w-5xl">
+    <footer className="mx-auto w-full max-w-2xl space-y-10 pb-2 lg:max-w-5xl">
       <PageNavigation />
       <SmallPrint />
     </footer>
