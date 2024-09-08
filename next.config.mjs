@@ -6,12 +6,10 @@ import { remarkPlugins } from './src/mdx/remark.mjs'
 import withSearch from './src/mdx/search.mjs'
 
 const withMDX = nextMDX({
-  extension: /\.mdx?$/,
   options: {
     remarkPlugins,
     rehypePlugins,
     recmaPlugins,
-    providerImportSource: "@mdx-js/react",
   },
 })
 
