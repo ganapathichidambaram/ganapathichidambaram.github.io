@@ -14,6 +14,8 @@ const withMDX = nextMDX({
 })
 
 const nextConfig = {
+  output: "export",
+  reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
   experimental: {
     outputFileTracingIncludes: {
