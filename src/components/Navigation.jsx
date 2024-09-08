@@ -190,44 +190,47 @@ function NavigationGroup({ group, className }) {
     </li>
   )
 }
+
 export const navigation = [
   {
-    title: 'Home',
+    title: 'Guides',
     links: [
       { title: 'Introduction', href: '/' },
-      // ... more links
+      { title: 'DevOps', href: '/devops' },
+      { title: 'Kubernetes', href: '/kubernetes' },
+      { title: 'Linux', href: '/linux' },
+      { title: 'Career', href: '/career' },
     ],
   },
-  // ... more navigation groups
-];
-export function Navigation(props) {
-  let [pathname, sections] = useInitialValue(
-    [usePathname(), useSectionStore((s) => s.sections)],
-    useIsInsideMobileNavigation(),
-  );
+  {
+    title: 'Resources',
+    links: [
+      { title: 'Airflow', href: '/airflow' },
+      { title: 'Ansible', href: '/ansible' },
+    ],
+  },
+]
 
+export function Navigation(props) {
   return (
     <nav {...props}>
-      {sections.length > 0 && ( // Conditionally render "Table of Contents"
-        <ul role="list">
-          <li className="text-xs font-semibold text-zinc-900 dark:text-white">
-            Table of Contents
-          </li>
-          {sections.map((section) => (
-            <li key={section.id}>
-              <NavLink
-                href={`#${section.id}`}
-                tag={section.tag}
-                isAnchorLink
-                active={!!pathname && pathname.includes(`#${section.id}`)} // Highlight active section
-              >
-                {section.title}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul role="list">
+        <TopLevelNavItem href="/">API</TopLevelNavItem>
+        <TopLevelNavItem href="#">Documentation</TopLevelNavItem>
+        <TopLevelNavItem href="#">Support</TopLevelNavItem>
+        {navigation.map((group, groupIndex) => (
+          <NavigationGroup
+            key={group.title}
+            group={group}
+            className={groupIndex === 0 ? 'md:mt-0' : ''}
+          />
+        ))}
+        <li className="sticky bottom-0 z-10 mt-6 min-[416px]:hidden">
+          <Button href="#" variant="filled" className="w-full">
+            Sign in
+          </Button>
+        </li>
+      </ul>
     </nav>
-  );
+  )
 }
-

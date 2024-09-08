@@ -9,7 +9,7 @@ import '@/styles/tailwind.css'
 export const metadata = {
   title: {
     template: '%s - Your Gateway to Tech Excellence',
-    default: 'TechnoBureau - Your Gateway to Tech Excellence',
+    default: 'Your Gateway to Tech Excellence',
   },
 }
 
