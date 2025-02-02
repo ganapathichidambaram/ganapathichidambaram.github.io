@@ -116,6 +116,8 @@ echo "Deleting ${RED}$fname${NC} "
 rm -rf "./src/components/$fname"
 done
 
+#
+rm -rf LICENSE.md CHANGELOG.md
 
 cat << 'EOF' > "src/app/page.mdx"
 
