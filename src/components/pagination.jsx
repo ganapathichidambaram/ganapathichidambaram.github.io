@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import { Button } from './button'
+import { Button } from './Button'
 
 export function Pagination({ 'aria-label': ariaLabel = 'Page navigation', className, ...props }) {
   return <nav aria-label={ariaLabel} {...props} className={clsx(className, 'flex gap-x-2')} />

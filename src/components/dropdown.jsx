@@ -3,7 +3,7 @@
 import * as Headless from '@headlessui/react'
 import clsx from 'clsx'
 
-import { Button } from './button'
+import { Button } from './Button'
 import { Link } from './link'
 
 export function Dropdown(props) {
