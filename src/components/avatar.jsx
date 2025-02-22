@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import React, { forwardRef } from 'react'
 import { TouchTarget } from './Button'
 import { Link } from './link'
+import Image from 'next/image'
 
 export function Avatar({ src = null, square = false, initials, alt = '', className, ...props }) {
   return (
