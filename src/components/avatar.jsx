@@ -30,7 +30,7 @@ export function Avatar({ src = null, square = false, initials, alt = '', classNa
           </text>
         </svg>
       )}
-      {src && <img className="size-full" src={src} alt={alt} />}
+      {src && <Image className="size-full" src={src} alt={alt} />}
     </span>
   )
 }
