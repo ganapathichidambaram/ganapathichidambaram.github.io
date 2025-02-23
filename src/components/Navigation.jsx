@@ -202,13 +202,13 @@ export const navigation = [
       { title: 'Career', href: '/career' },
     ],
   },
-  {
-    title: 'Resources',
-    links: [
-      { title: 'Airflow', href: '/airflow' },
-      { title: 'Ansible', href: '/ansible' },
-    ],
-  },
+  // {
+  //   title: 'Resources',
+  //   links: [
+  //     { title: 'Airflow', href: '/airflow' },
+  //     { title: 'Ansible', href: '/ansible' },
+  //   ],
+  // },
 ]
 
 export function Navigation(props) {
