@@ -7,7 +7,7 @@ function Article({ article }) {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
-        <Card.Title href={`/career/common/${article.slug}`}>
+        <Card.Title href={`/career/general/${article.slug}`}>
           {article.title}
         </Card.Title>
         <Card.Eyebrow
@@ -39,7 +39,7 @@ export const metadata = {
 }
 
 export default async function ArticlesIndex() {
-  const folder = 'career/common'
+  const folder = 'career/general'
   let articles = await getAllArticles(folder)
 
   return (

@@ -249,6 +249,7 @@ export const navigation = [
       { title: 'Introduction', href: '/' },
       { title: 'DevOps', href: '/devops',
         links: [
+          { title: 'General', href: '/devops/general' },
           { title: 'CI/CD', href: '/devops/cicd' },
           { title: 'Terraform', href: '/devops/terraform' },
           // { title: 'Ansible', href: '/devops/ansible' },
@@ -265,7 +266,7 @@ export const navigation = [
         title: 'Linux',
         href: '/linux',
         links: [
-          { title: 'Overview', href: '/linux/overview' },
+          { title: 'General', href: '/linux/general' },
           { title: 'System Administration', href: '/linux/administration' },
           { title: 'MySQL', href: '/linux/mysql' },
         ]
@@ -274,7 +275,7 @@ export const navigation = [
         title: 'Career',
         href: '/career',
         links: [
-          { title: 'Common', href: '/career/common' },
+          { title: 'General', href: '/career/general' },
         ]
       },
     ],
