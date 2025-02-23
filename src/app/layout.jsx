@@ -11,6 +11,46 @@ export const metadata = {
     template: '%s - Your Gateway to Tech Excellence',
     default: 'Your Gateway to Tech Excellence',
   },
+  siteName: 'TechnoBureau',
+  generator: 'TechnoBureau',
+  locale: 'en_US',
+  type: 'article',
+  url: 'https://ganapathichidambaram.github.io',
+  description: 'We offers a wealth of information, news, and insights into the ever-evolving world of technology. Whether you are a tech enthusiast, professional, or simply curious about the latest trends, TechnoBureau provides you with a one-stop hub to stay up-to-date and explore the fascinating realm of innovation',
+  keywords: "documentation,technical guides,development,programming",
+  authors: [{ name: 'Ganapathi Chidambaram' , url: 'https://github.com/GanapathiChidambaram'}],
+  referrer: 'origin-when-cross-origin',
+  creator: 'Ganapathi Chidambaram',
+  publisher: 'TechnoBureau',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    url: 'https://ganapathichidambaram.github.io',
+    siteName: 'TechnoBureau',
+    locale: 'en_US',
+    type: 'article',
+    authors: ['Ganapathi Chidambaram'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    creator: '@ganapathirj',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default async function RootLayout({ children }) {
