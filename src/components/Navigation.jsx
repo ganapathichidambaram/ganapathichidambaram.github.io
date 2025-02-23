@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { AnimatePresence, motion, useIsPresent } from 'framer-motion'
 
-import { Button } from '@/components/Button'
 import { useIsInsideMobileNavigation } from '@/components/MobileNavigation'
 import { useSectionStore } from '@/components/SectionProvider'
 import { Tag } from '@/components/Tag'
@@ -79,9 +78,29 @@ function VisibleSectionHighlight({ group, pathname }) {
   let height = isPresent
     ? Math.max(1, visibleSections.length) * itemHeight
     : itemHeight
-  let top =
-    group.links.findIndex((link) => link.href === pathname) * itemHeight +
-    firstVisibleSectionIndex * itemHeight
+
+  // Calculate absolute index including all sub-links
+  let absoluteIndex = 0
+  let targetIndex = 0
+
+  for (let i = 0; i < group.links.length; i++) {
+    const link = group.links[i]
+    if (link.href === pathname) {
+      targetIndex = absoluteIndex
+    }
+    absoluteIndex++
+
+    if (link.links) {
+      for (let j = 0; j < link.links.length; j++) {
+        if (link.links[j].href === pathname) {
+          targetIndex = absoluteIndex
+        }
+        absoluteIndex++
+      }
+    }
+  }
+
+  let top = targetIndex * itemHeight + firstVisibleSectionIndex * itemHeight
 
   return (
     <motion.div
@@ -98,8 +117,29 @@ function VisibleSectionHighlight({ group, pathname }) {
 function ActivePageMarker({ group, pathname }) {
   let itemHeight = remToPx(2)
   let offset = remToPx(0.25)
-  let activePageIndex = group.links.findIndex((link) => link.href === pathname)
-  let top = offset + activePageIndex * itemHeight
+
+  // Use the same absolute index calculation as VisibleSectionHighlight
+  let absoluteIndex = 0
+  let targetIndex = 0
+
+  for (let i = 0; i < group.links.length; i++) {
+    const link = group.links[i]
+    if (link.href === pathname) {
+      targetIndex = absoluteIndex
+    }
+    absoluteIndex++
+
+    if (link.links) {
+      for (let j = 0; j < link.links.length; j++) {
+        if (link.links[j].href === pathname) {
+          targetIndex = absoluteIndex
+        }
+        absoluteIndex++
+      }
+    }
+  }
+
+  let top = offset + targetIndex * itemHeight
 
   return (
     <motion.div
@@ -114,9 +154,6 @@ function ActivePageMarker({ group, pathname }) {
 }
 
 function NavigationGroup({ group, className }) {
-  // If this is the mobile navigation then we always render the initial
-  // state, so that the state does not change during the close animation.
-  // The state will still update when we re-open (re-render) the navigation.
   let isInsideMobileNavigation = useIsInsideMobileNavigation()
   let [pathname, sections] = useInitialValue(
     [usePathname(), useSectionStore((s) => s.sections)],
@@ -124,7 +161,10 @@ function NavigationGroup({ group, className }) {
   )
 
   let isActiveGroup =
-    group.links.findIndex((link) => link.href === pathname) !== -1
+    group.links.findIndex((link) =>
+      link.href === pathname ||
+      (link.links && link.links.some(sublink => sublink.href === pathname))
+    ) !== -1
 
   return (
     <li className={clsx('relative mt-6', className)}>
@@ -155,6 +195,17 @@ function NavigationGroup({ group, className }) {
               <NavLink href={link.href} active={link.href === pathname}>
                 {link.title}
               </NavLink>
+              {link.links && (
+                <ul role="list" className="ml-4">
+                  {link.links.map((sublink) => (
+                    <motion.li key={sublink.href} layout="position" className="relative">
+                      <NavLink href={sublink.href} active={sublink.href === pathname}>
+                        {sublink.title}
+                      </NavLink>
+                    </motion.li>
+                  ))}
+                </ul>
+              )}
               <AnimatePresence mode="popLayout" initial={false}>
                 {link.href === pathname && sections.length > 0 && (
                   <motion.ul
@@ -196,20 +247,40 @@ export const navigation = [
     title: 'Guides',
     links: [
       { title: 'Introduction', href: '/' },
-      { title: 'DevOps', href: '/devops' },
-      { title: 'Kubernetes', href: '/kubernetes' },
-      { title: 'Linux', href: '/linux' },
-      { title: 'Career', href: '/career' },
+      { title: 'DevOps', href: '/devops',
+        links: [
+          { title: 'CI/CD', href: '/devops/cicd' },
+          { title: 'Terraform', href: '/devops/terraform' },
+          // { title: 'Ansible', href: '/devops/ansible' },
+        ]
+      },
+      { title: 'Kubernetes', href: '/kubernetes',
+        links: [
+          { title: 'General', href: '/kubernetes/general' },
+          { title: 'Deployment', href: '/kubernetes/deployment' },
+          // { title: 'Services', href: '/kubernetes/services' },
+        ]
+      },
+      {
+        title: 'Linux',
+        href: '/linux',
+        links: [
+          { title: 'Overview', href: '/linux/overview' },
+          { title: 'System Administration', href: '/linux/administration' },
+          { title: 'MySQL', href: '/linux/mysql' },
+        ]
+      },
+      {
+        title: 'Career',
+        href: '/career',
+        links: [
+          { title: 'Common', href: '/career/common' },
+        ]
+      },
     ],
   },
-  // {
-  //   title: 'Resources',
-  //   links: [
-  //     { title: 'Airflow', href: '/airflow' },
-  //     { title: 'Ansible', href: '/ansible' },
-  //   ],
-  // },
 ]
+
 
 export function Navigation(props) {
   return (
